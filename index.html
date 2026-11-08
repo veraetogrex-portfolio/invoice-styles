@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Invoice Styles — veraetogrex_portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Invoice Styles · zero dependencies · github.com/veraetogrex-portfolio -->
+  <section class="iv is-paper" id="invoice" aria-label="Invoice in three styles">
+    <div class="iv-switch" role="tablist" aria-label="Invoice style">
+      <span class="iv-thumb"></span>
+      <button role="tab" data-style="paper" aria-selected="true">Paper</button>
+      <button role="tab" data-style="block">Block</button>
+      <button role="tab" data-style="term">Terminal</button>
+    </div>
+
+    <div class="iv-sheet"></div>
+
+    <h1 class="iv-part iv-title"><span class="iv-prompt">$ </span>Invoice <b>0118</b></h1>
+    <div class="iv-part iv-meta">
+      <p><span>From</span>Nocturne Studio</p>
+      <p><span>To</span>Halden Robotics</p>
+      <p><span>Due</span>Dec 1, 2026</p>
+    </div>
+    <div class="iv-part iv-items">
+      <div class="iv-row" data-price="480"><span class="iv-name">Design review</span><span class="iv-qty"><button class="iv-dec" aria-label="Less">−</button><b>2</b><button class="iv-inc" aria-label="More">+</button></span><span class="iv-sum"></span></div>
+      <div class="iv-row" data-price="1200"><span class="iv-name">Prototype sprint</span><span class="iv-qty"><button class="iv-dec" aria-label="Less">−</button><b>1</b><button class="iv-inc" aria-label="More">+</button></span><span class="iv-sum"></span></div>
+      <div class="iv-row" data-price="320"><span class="iv-name">Motion pass</span><span class="iv-qty"><button class="iv-dec" aria-label="Less">−</button><b>1</b><button class="iv-inc" aria-label="More">+</button></span><span class="iv-sum"></span></div>
+    </div>
+    <div class="iv-part iv-total"><span class="iv-total-label">Total</span><span class="iv-odo" aria-live="polite"></span></div>
+    <button class="iv-part iv-dl">Download PDF</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

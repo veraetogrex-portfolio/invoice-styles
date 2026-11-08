@@ -1,0 +1,121 @@
+/* Invoice Styles — github.com/veraetogrex-portfolio · zero dependencies */
+:root {
+  --bg: #07080c;
+  --text: #f2f3f7;
+  --text-2: #a4a7b6;
+  --text-3: #7f8293;
+  --line: rgba(255, 255, 255, .08);
+  --line-2: rgba(255, 255, 255, .14);
+  --paper: #f3eee3;
+  --block: #6a5af9;
+  --ion: #3fe0d0;
+  --font: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --display: var(--font);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(65% 60% at 50% 50%, #0e1018, var(--bg) 72%);
+  color: var(--text); font: 16px/1.4 var(--font);
+}
+h1, p { margin: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+.iv { position: relative; width: 1180px; height: 760px; }
+@media (max-width: 1240px) { .iv { zoom: .8; } }
+@media (max-width: 960px)  { .iv { zoom: .6; } }
+@media (max-width: 720px)  { .iv { zoom: .3; } }
+
+/* ── style switch ───────────────────────────────────── */
+.iv-switch {
+  position: absolute; left: 50%; top: 0; width: 492px; height: 64px; margin-left: -246px; padding: 6px; display: flex; border-radius: 999px;
+  background: #12131a; box-shadow: 0 0 0 1px var(--line-2) inset; z-index: 3;
+}
+.iv-switch button { position: relative; z-index: 1; flex: 1; border-radius: 999px; font: 600 20px var(--font); color: var(--text-2); transition: color .3s; }
+.iv-switch button[aria-selected="true"] { color: #0b0c12; }
+.iv.is-block .iv-switch button[aria-selected="true"] { color: #fff; }
+.iv-thumb { position: absolute; left: 6px; top: 6px; width: 160px; height: 52px; border-radius: 999px; background: var(--paper);
+  transition: transform .45s cubic-bezier(.65, 0, .35, 1), background .45s; }
+.iv.is-block .iv-thumb { transform: translateX(160px); background: var(--block); }
+.iv.is-term .iv-thumb { transform: translateX(320px); background: var(--ion); }
+
+/* ── the sheet morphs between the three looks ─────── */
+.iv-sheet {
+  position: absolute; left: 310px; top: 96px; width: 560px; height: 640px; border-radius: 6px; background: var(--paper);
+  box-shadow: 0 50px 110px -40px rgba(0, 0, 0, .9);
+  transition: left .5s cubic-bezier(.65, 0, .35, 1), width .5s cubic-bezier(.65, 0, .35, 1), border-radius .5s, background-color .3s, box-shadow .45s;
+}
+.iv-sheet::after { /* the torn receipt edge */
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 12px; transition: opacity .2s;
+  background: radial-gradient(circle at 10px 12px, #0c0d13 7px, transparent 7.5px) 0 0 / 20px 12px repeat-x;
+}
+.iv.is-block .iv-sheet { left: 0; width: 1180px; border-radius: 28px; background: var(--block); box-shadow: 0 0 0 1px rgba(255, 255, 255, .2) inset, 0 60px 120px -40px rgba(106, 90, 249, .7); }
+.iv.is-term  .iv-sheet { left: 120px; width: 940px; border-radius: 16px; background: #050607; box-shadow: 0 0 0 1.5px rgba(63, 224, 208, .35) inset, 0 50px 110px -40px rgba(0, 0, 0, .9); }
+.iv:not(.is-paper) .iv-sheet::after { opacity: 0; }
+
+/* ── parts: one set of elements, three layouts ─────── */
+.iv { --ink: #1b1a17; --ink-2: #6d6758; }
+.iv.is-block { --ink: #fff; --ink-2: rgba(255, 255, 255, .72); }
+.iv.is-term  { --ink: var(--ion); --ink-2: #6b7080; }
+.iv-part { position: absolute; z-index: 2; color: var(--ink); transform-origin: 0 0; transition: color .4s; }
+.iv-prompt { display: none; color: var(--text-3); }
+.iv-title b { font-weight: inherit; color: var(--ink-2); }
+.iv-meta p { display: flex; gap: 14px; color: var(--ink); }
+.iv-meta span { width: 64px; flex: none; font: 500 12px/inherit var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); padding-top: .25em; }
+.iv-row { display: flex; align-items: center; border-bottom: 1px solid color-mix(in srgb, var(--ink) 16%, transparent); }
+.iv-name { flex: 1; }
+.iv-qty { display: flex; align-items: center; gap: 10px; font-family: var(--mono); color: var(--ink-2); }
+.iv-qty b { font-weight: 500; min-width: 1ch; text-align: center; }
+.iv-qty button { display: none; }
+.iv-sum { width: 160px; text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.iv-total-label { display: block; font: 500 13px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 10px; }
+.iv-dl { display: flex; align-items: center; justify-content: center; border-radius: 10px; font-weight: 600; transition: color .4s, background-color .4s, box-shadow .4s; }
+
+/* paper: an ivory receipt */
+.is-paper .iv-title { left: 354px; top: 142px; font: 600 40px/1 Georgia, "Times New Roman", serif; letter-spacing: -.01em; }
+.is-paper .iv-meta  { left: 354px; top: 206px; font: 400 18px/1.6 var(--font); }
+.is-paper .iv-items { left: 354px; top: 330px; width: 472px; font: 400 19px var(--font); }
+.is-paper .iv-row   { height: 46px; }
+.is-paper .iv-qty b::after { content: " ×"; }
+.is-paper .iv-total { left: 354px; top: 500px; font: 700 64px/1 Georgia, "Times New Roman", serif; }
+.is-paper .iv-dl    { left: 354px; top: 642px; width: 472px; height: 56px; font-size: 19px; color: var(--paper); background: #1b1a17; }
+
+/* block: a loud colour sheet, a huge total */
+.is-block .iv-title { left: 64px; top: 150px; font: 700 76px/1 var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.is-block .iv-meta  { left: 650px; top: 150px; font: 500 21px/1.55 var(--font); }
+.is-block .iv-items { left: 650px; top: 300px; width: 470px; font: 500 21px var(--font); }
+.is-block .iv-row   { height: 56px; }
+.is-block .iv-qty button { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; font: 600 22px/1 var(--font); color: #fff; background: rgba(255, 255, 255, .16); }
+.is-block .iv-qty button:hover { background: rgba(255, 255, 255, .3); }
+.is-block .iv-qty b { color: #fff; font-size: 22px; }
+.is-block .iv-sum   { width: 140px; }
+.is-block .iv-total { left: 60px; top: 452px; font: 700 168px/1 var(--display); letter-spacing: -.02em; }
+.is-block .iv-dl    { left: 856px; top: 648px; width: 264px; height: 60px; border-radius: 999px; font-size: 20px; color: #fff; background: #0b0c12; }
+
+/* terminal: monospace, typed out */
+.is-term .iv-part   { font-family: var(--mono); }
+.is-term .iv-prompt { display: inline; }
+.is-term .iv-title  { left: 168px; top: 142px; font-size: 34px; font-weight: 500; line-height: 1; }
+.is-term .iv-meta   { left: 168px; top: 200px; font-size: 18px; line-height: 1.6; }
+.is-term .iv-meta p, .is-term .iv-meta span { font-family: var(--mono); }
+.is-term .iv-items  { left: 168px; top: 330px; width: 844px; font-size: 22px; }
+.is-term .iv-row    { height: 44px; border-bottom-style: dashed; }
+.is-term .iv-name   { color: var(--text); }
+.is-term .iv-qty b::before { content: "x"; }
+.is-term .iv-total  { left: 168px; top: 500px; font-size: 84px; font-weight: 600; line-height: 1; }
+.is-term .iv-dl     { left: 168px; top: 650px; height: 44px; font-size: 20px; font-weight: 500; color: var(--ion); background: transparent; }
+.is-term .iv-dl::before { content: "[\00a0"; } .is-term .iv-dl::after { content: "\00a0]"; }
+.iv-caret[hidden] { display: none; }
+.iv-caret { display: inline-block; width: .55em; height: .95em; margin-left: .15em; vertical-align: -.1em; background: var(--ion); animation: iv-blink 1s steps(1) infinite; }
+@keyframes iv-blink { 50% { opacity: 0; } }
+
+/* ── the odometer total ─────────────────────────────── */
+.iv-odo { display: inline-flex; font-variant-numeric: tabular-nums; }
+.iv-d { display: inline-block; height: 1.1em; overflow: hidden; }
+.iv-col { display: flex; flex-direction: column; transition: transform .7s cubic-bezier(.2, .8, .2, 1); }
+.iv-col i { font-style: normal; height: 1.1em; line-height: 1.1; text-align: center; }
+.iv-odo > i { font-style: normal; line-height: 1.1; }
+
+@media (prefers-reduced-motion: reduce) { .iv-col, .iv-sheet, .iv-thumb { transition-duration: .15s; } }
